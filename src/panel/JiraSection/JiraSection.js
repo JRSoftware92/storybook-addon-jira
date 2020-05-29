@@ -9,10 +9,11 @@ const JiraSection = ({ jiraEntry }) => {
     return null;
   }
 
+  const summary = get(jiraEntry, 'summary');
   return (
     <div id={`jira-section-${ticketKey}`} className="standard-margin full-width">
       <>
-        <span className="header-jira-section bold">{ticketKey}</span>
+        <span className="header-jira-section bold">{ticketKey} - {summary}</span>
         <div className="standard-margin full-width">
           <DescriptionSection description={get(jiraEntry, 'description')} />
         </div>
