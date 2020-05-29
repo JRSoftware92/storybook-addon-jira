@@ -1,17 +1,58 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import addons from '@storybook/addons';
+import get from 'lodash/get';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import { ADD_JIRA_TICKETS } from './constants';
+import { extractIssueDataFromFields } from "./utils/issue-utils";
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const fetchJiraTicketData = (jiraTicket) => {
+  return fetch(`https://jira.willhillatlas.com/rest/api/latest/issue/${jiraTicket}`).then(response => response.json())
+    .then(data => {
+      const id = get(data, 'id');
+      const key = get(data, 'key');
+      const fields = get(data, 'fields');
+      const issueData = extractIssueDataFromFields(fields);
+
+      return {
+        id,
+        key,
+        ...issueData,
+      };
+    });
+};
+
+const fetchJiraData = (jiraTickets = []) => {
+  if (!jiraTickets || !jiraTickets.length) {
+    return
+  }
+
+  return Promise.all(jiraTickets.map(fetchJiraTicketData));
+};
+
+const emitAddJiraData = ({ kind, story, jiraTickets }) => {
+  fetchJiraData(jiraTickets).then((jiraData) => {
+    addons.getChannel().emit(ADD_JIRA_TICKETS, {
+      storyName: story,
+      kind,
+      jiraData
+    });
+  }).catch((e) => {
+    console.error(e);
+  });
+};
+
+export const withJira = (...args) => {
+  const [storyFn, { parameters = {} }] = args;
+  let { jiraTickets } = parameters;
+
+  if (typeof jiraTickets === 'string') {
+    jiraTickets = [jiraTickets];
+  }
+
+  if (jiraTickets && Array.isArray(jiraTickets)) {
+    emitAddJiraData({ jiraTickets, story: storyFn });
+  }
+
+  return storyFn();
+};
+
+export default withJira;
