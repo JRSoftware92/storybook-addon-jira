@@ -4,8 +4,12 @@ import get from 'lodash/get';
 import { ADD_JIRA_TICKETS } from './constants';
 import { extractIssueDataFromFields } from "./utils/issue-utils";
 
-const fetchJiraTicketData = (jiraTicket) => {
-  return fetch(`https://jira.willhillatlas.com/rest/api/latest/issue/${jiraTicket}`).then(response => response.json())
+const constructIssueUrl = ({ protocol, jiraSite, apiPath }) => {
+  return `${protocol}://${jiraSite}${apiPath}`
+};
+
+const fetchJiraTicketData = (issueUrl = '') => (jiraTicket) => {
+  return fetch(`${issueUrl}${jiraTicket}`).then(response => response.json())
     .then(data => {
       const id = get(data, 'id');
       const key = get(data, 'key');
@@ -20,19 +24,17 @@ const fetchJiraTicketData = (jiraTicket) => {
     });
 };
 
-const fetchJiraData = (jiraTickets = []) => {
+const fetchJiraData = (jiraTickets = [], jiraOptions = {}) => {
   if (!jiraTickets || !jiraTickets.length) {
     return
   }
 
-  return Promise.all(jiraTickets.map(fetchJiraTicketData));
+  return Promise.all(jiraTickets.map(fetchJiraTicketData(constructIssueUrl(jiraOptions))));
 };
 
-const emitAddJiraData = ({ kind, story, jiraTickets }) => {
-  fetchJiraData(jiraTickets).then((jiraData) => {
+const emitAddJiraData = ({ jiraTickets, jiraOptions }) => {
+  fetchJiraData(jiraTickets, jiraOptions).then((jiraData) => {
     addons.getChannel().emit(ADD_JIRA_TICKETS, {
-      storyName: story,
-      kind,
       jiraData
     });
   }).catch((e) => {
@@ -40,19 +42,28 @@ const emitAddJiraData = ({ kind, story, jiraTickets }) => {
   });
 };
 
-export const withJira = (...args) => {
-  const [storyFn, { parameters = {} }] = args;
-  let { jiraTickets } = parameters;
+export const withJira = (userOptions = {}) => {
+  const defaultOptions = {
+    protocol: 'https',
+    jiraSite: 'jira.atlassian.com',
+    apiPath: '/rest/api/latest/issue/',
+  };
+  const options = { ...defaultOptions, ...userOptions };
 
-  if (typeof jiraTickets === 'string') {
-    jiraTickets = [jiraTickets];
-  }
+  return (...args) => {
+    const [storyFn, { parameters = {} }] = args;
+    let { jiraTickets } = parameters;
 
-  if (jiraTickets && Array.isArray(jiraTickets)) {
-    emitAddJiraData({ jiraTickets, story: storyFn });
-  }
+    if (typeof jiraTickets === 'string') {
+      jiraTickets = [jiraTickets];
+    }
 
-  return storyFn();
+    if (jiraTickets && Array.isArray(jiraTickets)) {
+      emitAddJiraData({ jiraTickets, jiraOptions: options, story: storyFn });
+    }
+
+    return storyFn();
+  };
 };
 
 export default withJira;

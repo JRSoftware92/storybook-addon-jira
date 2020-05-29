@@ -11,6 +11,6 @@ export const SimpleButton = () => <Button label="My Button" />;
 
 SimpleButton.story = {
   parameters: {
-    jiraTickets: ['WHUSP-7166', 'WHUSP-7025'],
+    jiraTickets: ['JRA-9'],
   },
 };
