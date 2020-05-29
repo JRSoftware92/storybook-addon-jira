@@ -16,7 +16,6 @@ const fetchJiraTicketData = (issueUrl = '') => (jiraTicket) => {
       const fields = get(data, 'fields');
       const issueData = extractIssueDataFromFields(fields);
 
-      console.log('Issue Data', key, issueData);
       return {
         id,
         key,
@@ -67,4 +66,6 @@ export const withJira = (userOptions = {}) => {
   };
 };
 
-export default withJira;
+if (module && module.hot && module.hot.decline) {
+  module.hot.decline();
+}

@@ -2,6 +2,7 @@
   "name": "addon-jira",
   "version": "0.1.0",
   "private": true,
+  "main": "index.js",
   "description": "A Storybook Addon for displaying test JIRA Ticket info alongside Stories.",
   "homepage": "https://github.com/JRSoftware92/storybook-addon-jira",
   "bugs": {
@@ -26,6 +27,7 @@
     "@storybook/react": "^5.3.18"
   },
   "scripts": {
+    "build": "react-scripts build",
     "storybook": "start-storybook",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
