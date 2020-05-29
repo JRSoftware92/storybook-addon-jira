@@ -13,6 +13,8 @@ var _reactMarkdown = _interopRequireDefault(require("react-markdown"));
 
 var _jira2md = require("jira2md");
 
+var _styles = require("../styles");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -25,7 +27,7 @@ var DescriptionSection = function DescriptionSection(_ref) {
     return (0, _jira2md.to_markdown)(description);
   }, [description]);
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "description-section"
+    style: _styles.descriptionSection
   }, /*#__PURE__*/_react.default.createElement(_reactMarkdown.default, {
     source: markdown
   }));

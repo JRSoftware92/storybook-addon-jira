@@ -1,9 +1,10 @@
 import React from 'react';
 
 import JiraSection from '../JiraSection/JiraSection';
+import { contentBox } from '../styles';
 
 const JiraPanel = ({ jiraData = [] }) => (
-  <div className="contentBox">
+  <div style={contentBox}>
     {
       jiraData.map((jiraEntry) => (
         <JiraSection

@@ -11,6 +11,8 @@ var _get = _interopRequireDefault(require("lodash/get"));
 
 var _DescriptionSection = _interopRequireDefault(require("../DescriptionSection/DescriptionSection"));
 
+var _styles = require("../styles");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var JiraSection = function JiraSection(_ref) {
@@ -27,23 +29,23 @@ var JiraSection = function JiraSection(_ref) {
   var statusName = (0, _get.default)(jiraEntry, 'status.name');
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "jira-section-".concat(ticketKey),
-    className: "standard-margin full-width"
+    style: _styles.fullWidthSection
   }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "bottom-border"
+    style: _styles.bottomBorder
   }, /*#__PURE__*/_react.default.createElement("span", {
-    className: "header-jira-section bold"
+    style: _styles.ticketHeader
   }, ticketKey, " - ", summary), /*#__PURE__*/_react.default.createElement("img", {
-    className: "aligned-icon left-spaced",
+    style: _styles.alignedIcon,
     src: (0, _get.default)(jiraEntry, 'issuetype.iconUrl'),
     alt: issueTypeName,
     title: issueTypeName
   }), /*#__PURE__*/_react.default.createElement("img", {
-    className: "aligned-icon left-spaced",
+    style: _styles.alignedIcon,
     src: (0, _get.default)(jiraEntry, 'status.iconUrl'),
     alt: statusName,
     title: statusName
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "standard-margin full-width"
+    style: _styles.fullWidthSection
   }, /*#__PURE__*/_react.default.createElement(_DescriptionSection.default, {
     description: (0, _get.default)(jiraEntry, 'description')
   }))));
