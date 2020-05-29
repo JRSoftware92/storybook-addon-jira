@@ -1,0 +1,41 @@
+.standard-margin {
+    margin: 16px 8px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.italics {
+    font-style: italic;
+}
+
+th {
+    padding: 8px;
+    font-weight: bold;
+}
+
+td {
+    padding: 8px;
+}
+
+.contentBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-jira-section {
+    font-size: 18px;
+    border-bottom: 1px solid grey;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+}
+
+.description-section {
+    font-size: 14px;
+    padding: 8px;
+}
