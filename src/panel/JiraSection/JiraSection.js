@@ -1,5 +1,6 @@
 import React from 'react';
 import get from 'lodash/get';
+import DescriptionSection from "../DescriptionSection/DescriptionSection";
 
 const JiraSection = ({ jiraEntry }) => {
   const ticketKey = get(jiraEntry, 'key');
@@ -13,7 +14,7 @@ const JiraSection = ({ jiraEntry }) => {
       <>
         <span className="header-jira-section bold">{ticketKey}</span>
         <div className="standard-margin full-width">
-          <span className="description-section">{get(jiraEntry, 'description')}</span>
+          <DescriptionSection description={get(jiraEntry, 'description')} />
         </div>
       </>
     </div>
