@@ -1,1 +1,1 @@
-require('./src/addon/register');
+require('./dist/register');
