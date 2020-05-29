@@ -2,6 +2,10 @@
     margin: 16px 8px;
 }
 
+.left-spaced {
+    margin-left: 4px;
+}
+
 .full-width {
     width: 100%;
 }
@@ -43,7 +47,6 @@ td {
     padding: 8px;
 }
 
-.issue-type-icon {
-    margin-left: 4px;
+.aligned-icon {
     vertical-align: text-bottom;
 }
