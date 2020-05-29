@@ -13,8 +13,6 @@ var _provideJira = _interopRequireDefault(require("../hoc/provideJira"));
 
 var _JiraPanel = _interopRequireDefault(require("./JiraPanel/JiraPanel"));
 
-require("./panel.css");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var WrappedJiraPanel = function WrappedJiraPanel(_ref) {

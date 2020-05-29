@@ -4,8 +4,6 @@ import { ScrollArea, Placeholder } from '@storybook/components';
 import provideJiraData from '../hoc/provideJira';
 import JiraPanel from './JiraPanel/JiraPanel';
 
-import './panel.css';
-
 export const WrappedJiraPanel = ({ jiraData }) => {
   const hasJiraData = jiraData && jiraData.length;
   return (
