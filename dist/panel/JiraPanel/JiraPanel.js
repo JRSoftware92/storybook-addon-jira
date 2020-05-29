@@ -1,17 +1,28 @@
-import React from 'react';
-import JiraSection from '../JiraSection/JiraSection';
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _JiraSection = _interopRequireDefault(require("../JiraSection/JiraSection"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var JiraPanel = function JiraPanel(_ref) {
   var _ref$jiraData = _ref.jiraData,
       jiraData = _ref$jiraData === void 0 ? [] : _ref$jiraData;
-  return /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     className: "contentBox"
   }, jiraData.map(function (jiraEntry) {
-    return /*#__PURE__*/React.createElement(JiraSection, {
+    return /*#__PURE__*/_react.default.createElement(_JiraSection.default, {
       key: jiraEntry.key,
       jiraEntry: jiraEntry
     });
   }));
 };
 
-export default JiraPanel;
+var _default = JiraPanel;
+exports.default = _default;

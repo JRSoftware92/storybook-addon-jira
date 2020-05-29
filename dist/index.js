@@ -1,8 +1,25 @@
-import _objectSpread from "/Users/jriley/Workspace/@storybook/addon-jira/node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/objectSpread2";
-import addons from '@storybook/addons';
-import get from 'lodash/get';
-import { ADD_JIRA_TICKETS } from './constants';
-import { extractIssueDataFromFields } from "./utils/issue-utils";
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.withJira = void 0;
+
+var _addons = _interopRequireDefault(require("@storybook/addons"));
+
+var _get = _interopRequireDefault(require("lodash/get"));
+
+var _constants = require("./constants");
+
+var _issueUtils = require("./utils/issue-utils");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var constructIssueUrl = function constructIssueUrl(_ref) {
   var protocol = _ref.protocol,
@@ -17,10 +34,10 @@ var fetchJiraTicketData = function fetchJiraTicketData() {
     return fetch("".concat(issueUrl).concat(jiraTicket)).then(function (response) {
       return response.json();
     }).then(function (data) {
-      var id = get(data, 'id');
-      var key = get(data, 'key');
-      var fields = get(data, 'fields');
-      var issueData = extractIssueDataFromFields(fields);
+      var id = (0, _get.default)(data, 'id');
+      var key = (0, _get.default)(data, 'key');
+      var fields = (0, _get.default)(data, 'fields');
+      var issueData = (0, _issueUtils.extractIssueDataFromFields)(fields);
       return _objectSpread({
         id: id,
         key: key
@@ -44,7 +61,7 @@ var emitAddJiraData = function emitAddJiraData(_ref2) {
   var jiraTickets = _ref2.jiraTickets,
       jiraOptions = _ref2.jiraOptions;
   fetchJiraData(jiraTickets, jiraOptions).then(function (jiraData) {
-    addons.getChannel().emit(ADD_JIRA_TICKETS, {
+    _addons.default.getChannel().emit(_constants.ADD_JIRA_TICKETS, {
       jiraData: jiraData
     });
   }).catch(function (e) {
@@ -52,7 +69,7 @@ var emitAddJiraData = function emitAddJiraData(_ref2) {
   });
 };
 
-export var withJira = function withJira() {
+var withJira = function withJira() {
   var userOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var defaultOptions = {
     protocol: 'https',
@@ -87,6 +104,8 @@ export var withJira = function withJira() {
     return storyFn();
   };
 };
+
+exports.withJira = withJira;
 
 if (module && module.hot && module.hot.decline) {
   module.hot.decline();

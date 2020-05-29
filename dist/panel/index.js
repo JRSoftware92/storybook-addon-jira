@@ -1,15 +1,34 @@
-import React from 'react';
-import { ScrollArea, Placeholder } from '@storybook/components';
-import provideJiraData from '../hoc/provideJira';
-import JiraPanel from './JiraPanel/JiraPanel';
-import './panel.css';
-export var WrappedJiraPanel = function WrappedJiraPanel(_ref) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.WrappedJiraPanel = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _components = require("@storybook/components");
+
+var _provideJira = _interopRequireDefault(require("../hoc/provideJira"));
+
+var _JiraPanel = _interopRequireDefault(require("./JiraPanel/JiraPanel"));
+
+require("./panel.css");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var WrappedJiraPanel = function WrappedJiraPanel(_ref) {
   var jiraData = _ref.jiraData;
   var hasJiraData = jiraData && jiraData.length;
-  return /*#__PURE__*/React.createElement(ScrollArea, {
+  return /*#__PURE__*/_react.default.createElement(_components.ScrollArea, {
     vertical: true
-  }, hasJiraData ? /*#__PURE__*/React.createElement(JiraPanel, {
+  }, hasJiraData ? /*#__PURE__*/_react.default.createElement(_JiraPanel.default, {
     jiraData: jiraData
-  }) : /*#__PURE__*/React.createElement(Placeholder, null, /*#__PURE__*/React.createElement("div", null, "No JIRA Data Found")));
+  }) : /*#__PURE__*/_react.default.createElement(_components.Placeholder, null, /*#__PURE__*/_react.default.createElement("div", null, "No JIRA Data Found")));
 };
-export default provideJiraData(WrappedJiraPanel);
+
+exports.WrappedJiraPanel = WrappedJiraPanel;
+
+var _default = (0, _provideJira.default)(WrappedJiraPanel);
+
+exports.default = _default;

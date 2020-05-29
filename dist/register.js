@@ -1,16 +1,24 @@
-import React from 'react';
-import { addons, types } from '@storybook/addons';
-import { JIRA_KEY, ADDON_ID, ADDON_TITLE, PANEL_ID } from './constants';
-import CoveragePanel from './panel';
-addons.register(ADDON_ID, function (api) {
-  addons.add(PANEL_ID, {
-    type: types.PANEL,
-    title: ADDON_TITLE,
-    paramKey: JIRA_KEY,
+"use strict";
+
+var _react = _interopRequireDefault(require("react"));
+
+var _addons = require("@storybook/addons");
+
+var _constants = require("./constants");
+
+var _panel = _interopRequireDefault(require("./panel"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_addons.addons.register(_constants.ADDON_ID, function (api) {
+  _addons.addons.add(_constants.PANEL_ID, {
+    type: _addons.types.PANEL,
+    title: _constants.ADDON_TITLE,
+    paramKey: _constants.JIRA_KEY,
     render: function render(_ref) {
       var active = _ref.active,
           key = _ref.key;
-      return /*#__PURE__*/React.createElement(CoveragePanel, {
+      return /*#__PURE__*/_react.default.createElement(_panel.default, {
         active: active,
         api: api,
         key: key

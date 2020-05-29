@@ -1,41 +1,53 @@
-import React from 'react';
-import get from 'lodash/get';
-import DescriptionSection from "../DescriptionSection/DescriptionSection";
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _get = _interopRequireDefault(require("lodash/get"));
+
+var _DescriptionSection = _interopRequireDefault(require("../DescriptionSection/DescriptionSection"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var JiraSection = function JiraSection(_ref) {
   var jiraEntry = _ref.jiraEntry;
-  var ticketKey = get(jiraEntry, 'key');
+  var ticketKey = (0, _get.default)(jiraEntry, 'key');
 
   if (!ticketKey) {
     console.warn("Warning: Invalid Jira Entry found.");
     return null;
   }
 
-  var summary = get(jiraEntry, 'summary');
-  var issueTypeName = get(jiraEntry, 'issuetype.name');
-  var statusName = get(jiraEntry, 'status.name');
-  return /*#__PURE__*/React.createElement("div", {
+  var summary = (0, _get.default)(jiraEntry, 'summary');
+  var issueTypeName = (0, _get.default)(jiraEntry, 'issuetype.name');
+  var statusName = (0, _get.default)(jiraEntry, 'status.name');
+  return /*#__PURE__*/_react.default.createElement("div", {
     id: "jira-section-".concat(ticketKey),
     className: "standard-margin full-width"
-  }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "bottom-border"
-  }, /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement("span", {
     className: "header-jira-section bold"
-  }, ticketKey, " - ", summary), /*#__PURE__*/React.createElement("img", {
+  }, ticketKey, " - ", summary), /*#__PURE__*/_react.default.createElement("img", {
     className: "aligned-icon left-spaced",
-    src: get(jiraEntry, 'issuetype.iconUrl'),
+    src: (0, _get.default)(jiraEntry, 'issuetype.iconUrl'),
     alt: issueTypeName,
     title: issueTypeName
-  }), /*#__PURE__*/React.createElement("img", {
+  }), /*#__PURE__*/_react.default.createElement("img", {
     className: "aligned-icon left-spaced",
-    src: get(jiraEntry, 'status.iconUrl'),
+    src: (0, _get.default)(jiraEntry, 'status.iconUrl'),
     alt: statusName,
     title: statusName
-  })), /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/_react.default.createElement("div", {
     className: "standard-margin full-width"
-  }, /*#__PURE__*/React.createElement(DescriptionSection, {
-    description: get(jiraEntry, 'description')
+  }, /*#__PURE__*/_react.default.createElement(_DescriptionSection.default, {
+    description: (0, _get.default)(jiraEntry, 'description')
   }))));
 };
 
-export default JiraSection;
+var _default = JiraSection;
+exports.default = _default;
