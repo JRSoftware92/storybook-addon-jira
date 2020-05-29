@@ -1,1 +1,1 @@
-require('./src/register');
+require('./src/addon/register');

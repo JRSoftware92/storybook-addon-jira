@@ -24,12 +24,12 @@
     "react-scripts": "3.4.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.1",
     "@storybook/react": "^5.3.18"
   },
   "scripts": {
-    "build": "react-scripts build",
+    "create:package": "NODE_ENV=production && rm -rf dist && mkdir dist && npx babel src/addon --out-dir dist --copy-files",
     "storybook": "start-storybook",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
