@@ -16,6 +16,7 @@ const fetchJiraTicketData = (issueUrl = '') => (jiraTicket) => {
       const fields = get(data, 'fields');
       const issueData = extractIssueDataFromFields(fields);
 
+      console.log('Issue Data', key, issueData);
       return {
         id,
         key,

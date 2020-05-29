@@ -30,6 +30,9 @@ td {
 
 .header-jira-section {
     font-size: 18px;
+}
+
+.bottom-border {
     border-bottom: 1px solid grey;
     padding-bottom: 4px;
     margin-bottom: 4px;
@@ -38,4 +41,9 @@ td {
 .description-section {
     font-size: 14px;
     padding: 8px;
+}
+
+.issue-type-icon {
+    margin-left: 4px;
+    vertical-align: text-bottom;
 }
