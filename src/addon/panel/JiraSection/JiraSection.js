@@ -1,12 +1,12 @@
 import React from 'react';
 import get from 'lodash/get';
-import DescriptionSection from "../DescriptionSection/DescriptionSection";
-import {alignedIcon, bottomBorder, fullWidthSection, ticketHeader} from "../styles";
+import DescriptionSection from '../DescriptionSection/DescriptionSection';
+import {alignedIcon, bottomBorder, fullWidthSection, ticketHeader} from '../styles';
 
 const JiraSection = ({ jiraEntry }) => {
   const ticketKey = get(jiraEntry, 'key');
   if (!ticketKey) {
-    console.warn(`Warning: Invalid Jira Entry found.`);
+    console.warn('Warning: Invalid Jira Entry found.');
     return null;
   }
 

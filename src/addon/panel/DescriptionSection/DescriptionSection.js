@@ -9,7 +9,7 @@ export const DescriptionSection = ({ description }) => {
   const markdown = useMemo(() => to_markdown(description), [description]);
   return (
     <div style={descriptionSection}>
-      <ReactMarkdown source={markdown} />
+      <ReactMarkdown>{markdown}</ReactMarkdown>
     </div>
   )
 };

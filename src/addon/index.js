@@ -46,7 +46,7 @@ export const withJira = (userOptions = {}) => {
   const defaultOptions = {
     protocol: 'https',
     jiraSite: 'jira.atlassian.com',
-    apiPath: '/rest/api/latest/issue/',
+    apiPath: '/rest/api/2/issue/',
   };
   const options = { ...defaultOptions, ...userOptions };
 
@@ -69,3 +69,5 @@ export const withJira = (userOptions = {}) => {
 if (module && module.hot && module.hot.decline) {
   module.hot.decline();
 }
+
+export default withJira;

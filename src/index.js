@@ -1,0 +1,1 @@
+exports.withJira = require('./addon');
