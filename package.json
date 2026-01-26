@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "jira2md": "^2.1.0",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-markdown": "^7.0.0",
